@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+  network:
+    - ['private_network', {ip: '10.0.15.100'}]
+    - ['forwarded_port', {guest: 8080, host: 8080}]
+
+provisioner:
+  name: chef_zero
+  # You may wish to disable always updating cookbooks in CI or other testing environments.
+  # For example:
+  #   always_update_cookbooks: <%= !ENV['CI'] %>
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7.2
+
+suites:
+  - name: default
+    run_list:
+      - recipe[amazon-rvs::default]
+    verifier:
+      inspec_tests:
+        - test/recipes
+    attributes:
+      amazon_rvs:
+        tomcat:
+          file_url: ''
+        creds:
+          data_bag: 'amazon_rvs'
