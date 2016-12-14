@@ -6,3 +6,5 @@ description 'Installs/Configures Apache Tomcat with Amazon Sandbox RVS'
 long_description 'Installs/Configures Apache Tomcat with Amazon Receipt Verification System Sandbox.'
 version '0.1.0'
 
+depends 'java'
+depends 'tomcat'
