@@ -2,8 +2,7 @@
 driver:
   name: vagrant
   network:
-    - ['private_network', {ip: '10.0.15.100'}]
-    - ['forwarded_port', {guest: 8080, host: 8080}]
+    - ['forwarded_port', {guest: 8080, host: 8090}]
 
 provisioner:
   name: chef_zero
@@ -16,6 +15,7 @@ verifier:
   name: inspec
 
 platforms:
+  - name: centos-6.7
   - name: centos-7.2
 
 suites:
@@ -28,6 +28,4 @@ suites:
     attributes:
       amazon_rvs:
         tomcat:
-          file_url: ''
-        creds:
-          data_bag: 'amazon_rvs'
+          file_url: 'YOUR_AMAZON_RVS_WAR FILE HERE'
